@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список задач</title>
+</head>
+<body>
+    <h1>Список задач (JSON через JS)</h1>
+    <ul id="task-list"></ul>
+
+    <script>
+        fetch("/api/tasks/")
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById("task-list");
+                data.forEach(task => {
+                    const li = document.createElement("li");
+                    li.textContent = `${task.title} - ${task.completed ? "✅" : "❌"}`;
+                    list.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
